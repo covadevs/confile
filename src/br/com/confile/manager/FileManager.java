@@ -1,7 +1,7 @@
 package br.com.confile.manager;
 
-import br.com.confile.exception.ConFileException;
 import br.com.confile.to.PropertyTO;
+import br.com.confile.utils.HashUtils;
 
 import java.io.*;
 import java.net.URL;
@@ -15,18 +15,28 @@ public class FileManager implements Manager {
     private static final Logger LOGGER = Logger.getLogger(FileManager.class.getCanonicalName());
 
     private File file;
+    private String fileChecksumMD5;
+    private String filePath;
     private Map<Integer, PropertyTO> variables;
 
     public FileManager() {
         this.variables = new LinkedHashMap<>();
+        this.fileChecksumMD5 = "";
+        this.filePath = "";
     }
 
-    public void open(String path) throws IOException, ConFileException {
+    public void openFile(String path) throws IOException {
         if(path == null || path.isEmpty()) {
             System.out.println("Argument required PATH not found.");
             return;
-//            throw new ConFileException(ConFileErrorCode.PATH_ARG_NOT_FOUND);
         }
+
+        this.filePath = path;
+        doOpenFile(path);
+        this.fileChecksumMD5 = HashUtils.getFileMD5(this.file);
+    }
+
+    private void doOpenFile(String path) throws FileNotFoundException {
         this.file = new File(path);
         if(!this.file.exists()) {
             URL resource = getClass().getResource(path);
@@ -45,6 +55,13 @@ public class FileManager implements Manager {
     }
 
     public void loadProperties() throws IOException {
+
+        String checkMD5 = HashUtils.getFileMD5(this.file);
+        if(checkMD5 != null && !checkMD5.equals(this.fileChecksumMD5)) {
+            System.out.println("File has been changed. Reopen it.");
+            return;
+        }
+
         if(this.file == null) {
             LOGGER.log(Level.WARNING, "Has no file to load properties.");
             throw new FileNotFoundException();
@@ -55,10 +72,16 @@ public class FileManager implements Manager {
         String line = bf.readLine();
         int i = 1;
         while(line != null) {
-
             String[] keyValue = line.split("\\.*=\\.*");
+            PropertyTO propertyTO = new PropertyTO();
 
-            variables.put(i++, new PropertyTO(keyValue[0], keyValue[1]));
+            if(keyValue[0].startsWith("#")) {
+                keyValue[0] = keyValue[0].substring(1);
+                propertyTO.setState(PropertyTO.COMMENTED_STATE);
+            }
+            propertyTO.setKey(keyValue[0]);
+            propertyTO.setValue(keyValue[1]);
+            variables.put(i++, propertyTO);
 
             line = bf.readLine();
         }
@@ -70,6 +93,12 @@ public class FileManager implements Manager {
     }
 
     public void showProperties() {
+
+        String checkMD5 = HashUtils.getFileMD5(this.file);
+        if(checkMD5 != null && !checkMD5.equals(this.fileChecksumMD5)) {
+            System.out.println("File has been changed. Reopen it.");
+            return;
+        }
 
         if(this.variables.isEmpty()) {
             System.out.println("No variables to show.");
@@ -110,5 +139,27 @@ public class FileManager implements Manager {
         } else {
             this.variables.get(propertyIndex).setState(PropertyTO.COMMENTED_STATE);
         }
+    }
+
+    public void findProperties(String searchString) {
+        this.variables.forEach((k, v) -> {
+            if(v.getKey().contains(searchString) || v.getValue().contains(searchString)) {
+                StringBuilder line = new StringBuilder();
+                line.append("[");
+                line.append(k);
+                line.append("]");
+                line.append("\t");
+
+                if(v.getState() == PropertyTO.COMMENTED_STATE) {
+                    line.append("#");
+                }
+
+                line.append(v.getKey());
+                line.append("=");
+                line.append(v.getValue());
+
+                System.out.println(line.toString());
+            }
+        });
     }
 }

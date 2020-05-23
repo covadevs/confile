@@ -4,6 +4,7 @@ import br.com.confile.command.QuitCommand;
 import br.com.confile.command.UnavailableCommand;
 import br.com.confile.command.file.*;
 import br.com.confile.command.screen.ClearScreenCommand;
+import br.com.confile.command.screen.ShowMenuCommand;
 import br.com.confile.context.ProgramContext;
 import br.com.confile.manager.CommandManager;
 import br.com.confile.manager.FileManager;
@@ -58,6 +59,7 @@ public class Main {
             commandManager.add(new LoadPropertiesCommand(manager));
             commandManager.add(new ShowPropertiesCommand(manager));
             commandManager.add(new CommentPropertyCommand(manager));
+            commandManager.add(new FindPropertiesCommand(manager, ""));
         } else if (manager instanceof ScreenManager) {
             commandManager.add(new ClearScreenCommand(manager));
             commandManager.add(new ShowMenuCommand(manager));

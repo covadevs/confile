@@ -10,9 +10,18 @@ public class PropertyTO {
 
     private int state = INITIAL_STATE;
 
+    public PropertyTO() {
+        this("", "", 0);
+    }
+
     public PropertyTO(String key, String value) {
         this.key = key;
         this.value = value;
+    }
+
+    public PropertyTO(String key, String value, int state) {
+        this(key, value);
+        this.state = state;
     }
 
     public String getKey() {

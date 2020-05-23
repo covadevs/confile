@@ -1,7 +1,6 @@
 package br.com.confile.command.file;
 
 import br.com.confile.command.FlushableCommand;
-import br.com.confile.exception.ConFileException;
 import br.com.confile.manager.Manager;
 import br.com.confile.to.CommandTO;
 
@@ -21,8 +20,8 @@ public class OpenFileCommand extends BaseFileManagerCommand implements Flushable
     @Override
     public void execute() {
         try {
-            this.manager.open(this.path);
-        } catch (IOException | ConFileException e ) {
+            this.manager.openFile(this.path);
+        } catch (IOException e ) {
             flush();
             e.printStackTrace();
         }
