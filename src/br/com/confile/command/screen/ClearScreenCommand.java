@@ -1,4 +1,4 @@
-package br.com.confile.command;
+package br.com.confile.command.screen;
 
 import br.com.confile.manager.Manager;
 

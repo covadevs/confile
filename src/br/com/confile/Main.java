@@ -1,6 +1,9 @@
 package br.com.confile;
 
-import br.com.confile.command.*;
+import br.com.confile.command.QuitCommand;
+import br.com.confile.command.UnavailableCommand;
+import br.com.confile.command.file.*;
+import br.com.confile.command.screen.ClearScreenCommand;
 import br.com.confile.context.ProgramContext;
 import br.com.confile.manager.CommandManager;
 import br.com.confile.manager.FileManager;
@@ -11,6 +14,7 @@ import br.com.confile.to.CommandTO;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,12 +25,13 @@ public class Main {
         List<String> commandArgs;
         CommandTO commandTO;
 
-        FileManager fileManager = new FileManager();
-        ScreenManager screenManager = new ScreenManager();
-        CommandManager commandManager = new CommandManager();
+        List<Manager> managerList = new ArrayList<>();
+        managerList.add(new FileManager());
+        managerList.add(new ScreenManager());
 
-        configureCommands(commandManager, fileManager);
-        configureCommands(commandManager, screenManager);
+        CommandManager commandManager = new CommandManager();
+        managerList.forEach(manager -> configureCommands(commandManager, manager));
+
         commandManager.notify(new CommandTO("/m"));
 
         while(ProgramContext.getInstance().isRunning()) {

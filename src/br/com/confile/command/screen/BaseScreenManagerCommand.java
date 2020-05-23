@@ -1,5 +1,6 @@
-package br.com.confile.command;
+package br.com.confile.command.screen;
 
+import br.com.confile.command.Command;
 import br.com.confile.manager.Manager;
 import br.com.confile.manager.ScreenManager;
 

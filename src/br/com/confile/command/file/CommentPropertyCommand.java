@@ -1,4 +1,4 @@
-package br.com.confile.command;
+package br.com.confile.command.file;
 
 import br.com.confile.manager.Manager;
 import br.com.confile.to.CommandTO;

@@ -1,5 +1,6 @@
-package br.com.confile.command;
+package br.com.confile.command.file;
 
+import br.com.confile.command.screen.BaseScreenManagerCommand;
 import br.com.confile.manager.Manager;
 
 public class ShowMenuCommand extends BaseScreenManagerCommand {
