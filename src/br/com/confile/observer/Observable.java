@@ -3,7 +3,7 @@ package br.com.confile.observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Observable<O extends Observer, P> {
+public abstract class Observable<O extends Observer<P>, P> {
 
     protected List<O> observers;
 

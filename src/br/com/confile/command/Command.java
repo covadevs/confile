@@ -4,7 +4,7 @@ import br.com.confile.manager.Manager;
 import br.com.confile.observer.Observer;
 import br.com.confile.to.CommandTO;
 
-public abstract class Command<M extends Manager> implements Observer {
+public abstract class Command<M extends Manager> implements Observer<CommandTO> {
 
     protected M manager;
 
