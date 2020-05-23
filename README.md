@@ -1,8 +1,8 @@
 # Confile
 A properties file editor
 
-| Command |                   Description                   |       Example       |
-|:-------:|:-----------------------------------------------:|:-------------------:|
+| Command | Description                                     |       Example       |
+|:-------:|-------------------------------------------------|:-------------------:|
 |    /m   | show menu                                       |          -          |
 |    /s   | show properties                                 |          -          |
 |    /l   | load properties                                 |          -          |
