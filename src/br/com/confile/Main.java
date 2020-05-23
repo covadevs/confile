@@ -48,7 +48,7 @@ public class Main {
         commandManager.add(new OpenFileCommand(fileManager, ""));
         commandManager.add(new LoadPropertiesCommand(fileManager));
         commandManager.add(new ShowPropertiesCommand(fileManager));
-        commandManager.add(new CommentPropertieCommand(fileManager));
+        commandManager.add(new CommentPropertyCommand(fileManager));
 
         commandManager.add(new ClearScreenCommand(screenManager));
         commandManager.add(new ShowMenuCommand(screenManager));

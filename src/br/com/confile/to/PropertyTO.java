@@ -1,6 +1,6 @@
 package br.com.confile.to;
 
-public class PropertieTO {
+public class PropertyTO {
 
     public static int INITIAL_STATE = 0;
     public static int COMMENTED_STATE = 1;
@@ -10,7 +10,7 @@ public class PropertieTO {
 
     private int state = INITIAL_STATE;
 
-    public PropertieTO(String key, String value) {
+    public PropertyTO(String key, String value) {
         this.key = key;
         this.value = value;
     }

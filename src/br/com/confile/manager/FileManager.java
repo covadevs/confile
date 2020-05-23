@@ -1,7 +1,7 @@
 package br.com.confile.manager;
 
 import br.com.confile.exception.ConFileException;
-import br.com.confile.to.PropertieTO;
+import br.com.confile.to.PropertyTO;
 
 import java.io.*;
 import java.net.URL;
@@ -15,7 +15,7 @@ public class FileManager implements Manager {
     private static final Logger LOGGER = Logger.getLogger(FileManager.class.getCanonicalName());
 
     private File file;
-    private Map<Integer, PropertieTO> variables;
+    private Map<Integer, PropertyTO> variables;
 
     public FileManager() {
         this.variables = new LinkedHashMap<>();
@@ -58,7 +58,7 @@ public class FileManager implements Manager {
 
             String[] keyValue = line.split("\\.*=\\.*");
 
-            variables.put(i++, new PropertieTO(keyValue[0], keyValue[1]));
+            variables.put(i++, new PropertyTO(keyValue[0], keyValue[1]));
 
             line = bf.readLine();
         }
@@ -81,13 +81,13 @@ public class FileManager implements Manager {
         StringBuilder line = new StringBuilder();
 
 
-        for (Map.Entry<Integer, PropertieTO> entry : this.variables.entrySet()) {
+        for (Map.Entry<Integer, PropertyTO> entry : this.variables.entrySet()) {
             line.append("[");
             line.append(entry.getKey());
             line.append("]");
             line.append("\t");
 
-            if(entry.getValue().getState() == PropertieTO.COMMENTED_STATE) {
+            if(entry.getValue().getState() == PropertyTO.COMMENTED_STATE) {
                 line.append("#");
             }
 
@@ -100,15 +100,15 @@ public class FileManager implements Manager {
         }
     }
 
-    public void commentPropertie(int propertieIndex) {
+    public void commentProperty(int propertyIndex) {
         if(this.variables.isEmpty()) {
             System.out.println("No variables to comment.");
             return;
         }
-        if(this.variables.get(propertieIndex).getState() == PropertieTO.COMMENTED_STATE) {
-            this.variables.get(propertieIndex).setState(PropertieTO.INITIAL_STATE);
+        if(this.variables.get(propertyIndex).getState() == PropertyTO.COMMENTED_STATE) {
+            this.variables.get(propertyIndex).setState(PropertyTO.INITIAL_STATE);
         } else {
-            this.variables.get(propertieIndex).setState(PropertieTO.COMMENTED_STATE);
+            this.variables.get(propertyIndex).setState(PropertyTO.COMMENTED_STATE);
         }
     }
 }

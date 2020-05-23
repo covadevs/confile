@@ -3,19 +3,19 @@ package br.com.confile.command;
 import br.com.confile.manager.FileManager;
 import br.com.confile.to.CommandTO;
 
-public class CommentPropertieCommand extends BaseFileManagerCommand {
+public class CommentPropertyCommand extends BaseFileManagerCommand {
 
-    private int propertieIndex;
+    private int propertyIndex;
 
-    private static final int PROPERTIE_INDEX = 0;
+    private static final int PROPERTY_INDEX = 0;
 
-    public CommentPropertieCommand(FileManager manager) {
+    public CommentPropertyCommand(FileManager manager) {
         super(manager);
     }
 
     @Override
     public void execute() {
-        manager.commentPropertie(this.propertieIndex);
+        manager.commentProperty(this.propertyIndex);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CommentPropertieCommand extends BaseFileManagerCommand {
     protected void beforeExecute(CommandTO commandTO) {
         super.beforeExecute(commandTO);
         if(!commandTO.getCommandParams().isEmpty()) {
-            this.propertieIndex = Integer.parseInt(commandTO.getCommandParams().get(PROPERTIE_INDEX));
+            this.propertyIndex = Integer.parseInt(commandTO.getCommandParams().get(PROPERTY_INDEX));
         }
     }
 }
