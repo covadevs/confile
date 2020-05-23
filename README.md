@@ -8,7 +8,7 @@ A properties file editor
 |    /l   | load properties                                 |          -          |
 |    /#   | comment property (undo if already is commented) | /# [property_index] |
 |    /f   | find property                                   |  /f [search_string] |
-|    /o   | open file                                       |      /s [path]      |
+|    /o   | open file                                       |      /o [path]      |
 |    /x   | save file                                       |          -          |
 |    /c   | clear screen                                    |          -          |
 |    /q   | quit program                                    |          -          |
