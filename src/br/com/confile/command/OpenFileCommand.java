@@ -1,29 +1,28 @@
 package br.com.confile.command;
 
 import br.com.confile.exception.ConFileException;
-import br.com.confile.manager.FileManager;
+import br.com.confile.manager.Manager;
 import br.com.confile.to.CommandTO;
 
 import java.io.IOException;
 
-public class OpenFileCommand extends BaseFileManagerCommand {
+public class OpenFileCommand extends BaseFileManagerCommand implements FlushableCommand {
 
     private String path;
 
     private static final Integer PATH = 0;
 
-    public OpenFileCommand(FileManager manager, String path) {
+    public OpenFileCommand(Manager manager, String path) {
         super(manager);
         this.path = path;
     }
-
 
     @Override
     public void execute() {
         try {
             this.manager.open(this.path);
         } catch (IOException | ConFileException e ) {
-            flushCommand();
+            flush();
             e.printStackTrace();
         }
     }
@@ -42,8 +41,7 @@ public class OpenFileCommand extends BaseFileManagerCommand {
     }
 
     @Override
-    protected void flushCommand() {
-        super.flushCommand();
+    public void flush() {
         this.path = "";
     }
 }

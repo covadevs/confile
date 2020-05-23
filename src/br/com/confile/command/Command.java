@@ -1,23 +1,15 @@
 package br.com.confile.command;
 
 import br.com.confile.manager.Manager;
-import br.com.confile.observer.Observer;
 import br.com.confile.to.CommandTO;
 
-public abstract class Command<M extends Manager> implements Observer<CommandTO> {
+public abstract class Command<M extends Manager> implements ExecutableCommand, NamedCommand, CommandObserver {
 
     protected M manager;
 
-    public Command(M manager) {
-        this.manager = manager;
-    }
-
-    public abstract void execute();
-
-    public abstract String getCommandName();
-
-    protected void flushCommand() {
-        //Hook method
+    @SuppressWarnings("unchecked")
+    public Command(Manager manager) {
+        this.manager = (M) manager;
     }
 
     @Override

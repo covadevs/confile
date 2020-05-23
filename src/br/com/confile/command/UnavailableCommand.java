@@ -1,24 +1,9 @@
 package br.com.confile.command;
 
 import br.com.confile.ConFileConstants;
-import br.com.confile.manager.FileManager;
 import br.com.confile.to.CommandTO;
 
-public class UnavaliableCommand extends Command {
-
-    public UnavaliableCommand(FileManager manager) {
-        super(manager);
-    }
-
-    @Override
-    public void execute() {
-
-    }
-
-    @Override
-    public String getCommandName() {
-        return null;
-    }
+public class UnavailableCommand implements CommandObserver {
 
     @Override
     public void update(CommandTO commandTO) {

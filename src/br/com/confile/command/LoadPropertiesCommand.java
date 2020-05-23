@@ -1,12 +1,12 @@
 package br.com.confile.command;
 
-import br.com.confile.manager.FileManager;
+import br.com.confile.manager.Manager;
 
 import java.io.IOException;
 
 public class LoadPropertiesCommand extends BaseFileManagerCommand {
 
-    public LoadPropertiesCommand(FileManager manager) {
+    public LoadPropertiesCommand(Manager manager) {
         super(manager);
     }
 

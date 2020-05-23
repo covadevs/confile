@@ -1,13 +1,9 @@
 package br.com.confile.command;
 
 import br.com.confile.context.ProgramContext;
-import br.com.confile.manager.FileManager;
+import br.com.confile.to.CommandTO;
 
-public class QuitCommand extends Command {
-
-    public QuitCommand(FileManager manager) {
-        super(manager);
-    }
+public class QuitCommand implements ExecutableCommand, NamedCommand, CommandObserver {
 
     @Override
     public void execute() {
@@ -17,5 +13,12 @@ public class QuitCommand extends Command {
     @Override
     public String getCommandName() {
         return "/q";
+    }
+
+    @Override
+    public void update(CommandTO param) {
+        if(param.getCommandName().equals(getCommandName())) {
+            execute();
+        }
     }
 }

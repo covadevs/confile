@@ -1,10 +1,11 @@
 package br.com.confile.command;
 
-import br.com.confile.manager.ScreenManager;
+import br.com.confile.manager.Manager;
 
 public class ClearScreenCommand extends BaseScreenManagerCommand {
 
-    public ClearScreenCommand(ScreenManager manager) {
+
+    public ClearScreenCommand(Manager manager) {
         super(manager);
     }
 
