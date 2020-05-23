@@ -60,6 +60,7 @@ public class Main {
             commandManager.add(new ShowPropertiesCommand(manager));
             commandManager.add(new CommentPropertyCommand(manager));
             commandManager.add(new FindPropertiesCommand(manager, ""));
+            commandManager.add(new SaveFileCommand(manager));
         } else if (manager instanceof ScreenManager) {
             commandManager.add(new ClearScreenCommand(manager));
             commandManager.add(new ShowMenuCommand(manager));

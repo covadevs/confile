@@ -162,4 +162,44 @@ public class FileManager implements Manager {
             }
         });
     }
+
+    public void saveFile() {
+        try {
+            doSaveFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void doSaveFile() throws IOException {
+        boolean answer = true;
+        String checkMD5 = HashUtils.getFileMD5(this.file);
+        if(checkMD5 != null && !checkMD5.equals(this.fileChecksumMD5)) {
+            System.out.print("\nFile has been changed.\nDo you want to overwrite it? (y/n) > ");
+            BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+            answer = bf.readLine().toLowerCase().equals("y");
+        }
+
+        if(answer) {
+            FileOutputStream fous = new FileOutputStream(this.file);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fous));
+
+            this.variables.forEach((k, v) -> {
+                try {
+                    if (v.getState() == PropertyTO.COMMENTED_STATE) {
+                        writer.write("#");
+                    }
+                    writer.write(v.getKey());
+                    writer.write("=");
+                    writer.write(v.getValue());
+                    writer.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            writer.close();
+            fous.close();
+        }
+    }
 }
