@@ -1,10 +1,9 @@
 package br.com.confile;
 
-import br.com.confile.command.AbstractCommand;
 import br.com.confile.command.screen.ShowMenuCommand;
 import br.com.confile.context.ProgramContext;
 import br.com.confile.factory.CommandFactory;
-import br.com.confile.to.CommandTO;
+import br.com.confile.handler.CommandHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,23 +15,26 @@ public class Main {
 
     public static void main(String[] args) {
         List<String> commands;
+        CommandHandler commandChained;
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        CommandFactory.getCommand(ShowMenuCommand.COMMAND_NAME).execute();
 
+        CommandFactory.getCommand(ShowMenuCommand.COMMAND_NAME).execute();
         while(ProgramContext.getInstance().isRunning()) {
             System.out.print("> ");
             try {
-                commands = Arrays.asList(bf.readLine().trim().split(">>"));
-                commands.forEach(command -> {
-                    List<String> commandArgs = Arrays.asList(command.trim().split("\\s"));
-                    CommandTO commandTO = new CommandTO();
-                    commandTO.setCommandName(commandArgs.get(0));
-                    commandArgs.subList(1, commandArgs.size()).forEach(commandTO::add);
+                String line = bf.readLine().trim();
+                if(!line.isEmpty()) {
+                    commands = Arrays.asList(line.split(">>"));
 
-                    AbstractCommand c = CommandFactory.getCommand(commandTO.getCommandName());
-                    c.setRequestTO(commandTO);
-                    c.execute();
-                });
+                    commandChained = new CommandHandler(commands.get(0));
+                    for (String command : commands) {
+                        if (!command.equals(commandChained.getRequest()))
+                            commandChained.setNext(new CommandHandler(command));
+                    }
+
+                    commandChained.handle();
+                    commandChained.afterHandle();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
