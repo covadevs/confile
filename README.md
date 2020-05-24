@@ -37,9 +37,9 @@ varn=valuen
     You can do it by using the _/l_ command.
     
 # Features to do
--[ ] Add property _/a_
--[ ] Remove property _/r_
--[ ] Change property key or value _/z_
+- [ ] Add property _/a_ <br/>
+- [ ] Remove property _/r_ <br/>
+- [ ] Change property key or value _/z_ <br/>
 
 
 ![GitHub Logo](/uml.jpeg)
