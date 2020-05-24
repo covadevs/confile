@@ -26,12 +26,15 @@ varn=valuen
 * _/o_ Open a file
     * _\<path\>_ path to file that wil be loaded.
 * _/l_ Load properties from a file
+    * You need a previously loaded file. <br/>
+    You can do it by using the _/o_ command.
 * _/#_ Comment a property
     * You need properties previously loaded.
     * You can pass _n_ args each one separated by and empty space.
     * If a property is already commented, it'll be uncomment.
 * _/s_ Show properties from a file
-    * You need a previously loaded file. <br>
-    You can do it by using the _/o_ command.
+    * You need properties previously loaded. <br/>
+    You can do it by using the _/l_ command.
+
 
 ![GitHub Logo](/uml.jpeg)
