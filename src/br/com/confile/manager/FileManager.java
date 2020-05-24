@@ -129,15 +129,22 @@ public class FileManager implements Manager {
         }
     }
 
-    public void commentProperty(int propertyIndex) {
-        if(this.variables.isEmpty()) {
+    public void commentProperty(int[] properiesIndex) {
+        if (this.variables.isEmpty()) {
             System.out.println("No variables to comment.");
             return;
         }
-        if(this.variables.get(propertyIndex).getState() == PropertyTO.COMMENTED_STATE) {
-            this.variables.get(propertyIndex).setState(PropertyTO.INITIAL_STATE);
-        } else {
-            this.variables.get(propertyIndex).setState(PropertyTO.COMMENTED_STATE);
+
+        for (int propertyIdx : properiesIndex) {
+            if(this.variables.containsKey(propertyIdx)) {
+                if (this.variables.get(propertyIdx).getState() == PropertyTO.COMMENTED_STATE) {
+                    this.variables.get(propertyIdx).setState(PropertyTO.INITIAL_STATE);
+                } else {
+                    this.variables.get(propertyIdx).setState(PropertyTO.COMMENTED_STATE);
+                }
+            } else {
+                System.out.println("Property index "+propertyIdx+" doesn't exists");
+            }
         }
     }
 

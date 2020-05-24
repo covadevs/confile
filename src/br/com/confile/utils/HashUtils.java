@@ -11,6 +11,9 @@ public class HashUtils {
     private HashUtils() {}
 
     public static String getFileMD5(File input) {
+        if(input == null)
+            return null;
+        
         try (InputStream in = new FileInputStream(input)) {
             MessageDigest digest = MessageDigest.getInstance("MD5");
             byte[] block = new byte[4096];

@@ -13,6 +13,10 @@ public class CommandHandler extends BaseHandler<CommandHandler, String> {
         super(request);
     }
 
+
+    //TODO:
+    // Tem como melhorar esse método adicionando
+    // uma cauda para servir de sentinela.
     @Override
     public void setNext(CommandHandler commandHandler) {
         if(next != null) {
