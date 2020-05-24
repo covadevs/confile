@@ -15,24 +15,24 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        List<String> commands;
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-
-        List<String> commandArgs;
-        CommandTO commandTO;
-
         CommandFactory.getCommand(ShowMenuCommand.COMMAND_NAME).execute();
 
         while(ProgramContext.getInstance().isRunning()) {
+            System.out.print("> ");
             try {
-                System.out.print("> ");
-                commandArgs = Arrays.asList(bf.readLine().trim().split("\\s"));
-                commandTO = new CommandTO();
-                commandTO.setCommandName(commandArgs.get(0));
-                commandArgs.subList(1, commandArgs.size()).forEach(commandTO::add);
+                commands = Arrays.asList(bf.readLine().trim().split(">>"));
+                commands.forEach(command -> {
+                    List<String> commandArgs = Arrays.asList(command.trim().split("\\s"));
+                    CommandTO commandTO = new CommandTO();
+                    commandTO.setCommandName(commandArgs.get(0));
+                    commandArgs.subList(1, commandArgs.size()).forEach(commandTO::add);
 
-                AbstractCommand c = CommandFactory.getCommand(commandTO.getCommandName());
-                c.setRequestTO(commandTO);
-                c.execute();
+                    AbstractCommand c = CommandFactory.getCommand(commandTO.getCommandName());
+                    c.setRequestTO(commandTO);
+                    c.execute();
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }
