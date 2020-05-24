@@ -72,17 +72,19 @@ public class FileManager implements Manager {
         String line = bf.readLine();
         int i = 1;
         while(line != null) {
-            String[] keyValue = line.split("\\.*=\\.*");
             PropertyTO propertyTO = new PropertyTO();
+            if(line.matches(".*=.*")) {
+                String[] keyValue = line.split("\\.*=\\.*");
 
-            if(keyValue[0].startsWith("#")) {
-                keyValue[0] = keyValue[0].substring(1);
-                propertyTO.setState(PropertyTO.COMMENTED_STATE);
+                if (keyValue[0].startsWith("#")) {
+                    keyValue[0] = keyValue[0].substring(1);
+                    propertyTO.setState(PropertyTO.COMMENTED_STATE);
+                }
+                propertyTO.setKey(keyValue[0]);
+                propertyTO.setValue(keyValue[1]);
+                variables.put(i++, propertyTO);
+
             }
-            propertyTO.setKey(keyValue[0]);
-            propertyTO.setValue(keyValue[1]);
-            variables.put(i++, propertyTO);
-
             line = bf.readLine();
         }
 
