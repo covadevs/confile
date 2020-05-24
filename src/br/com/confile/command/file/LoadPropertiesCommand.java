@@ -6,6 +6,8 @@ import java.io.IOException;
 
 public class LoadPropertiesCommand extends BaseFileManagerCommand {
 
+    public static final String COMMAND_NAME = "/l";
+
     public LoadPropertiesCommand(Manager manager) {
         super(manager);
     }
@@ -21,6 +23,6 @@ public class LoadPropertiesCommand extends BaseFileManagerCommand {
 
     @Override
     public String getCommandName() {
-        return "/l";
+        return COMMAND_NAME;
     }
 }

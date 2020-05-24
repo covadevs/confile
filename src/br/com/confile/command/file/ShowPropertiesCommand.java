@@ -4,6 +4,7 @@ import br.com.confile.manager.Manager;
 
 public class ShowPropertiesCommand extends BaseFileManagerCommand {
 
+    public static final String COMMAND_NAME = "/s";
 
     public ShowPropertiesCommand(Manager manager) {
         super(manager);
@@ -16,6 +17,6 @@ public class ShowPropertiesCommand extends BaseFileManagerCommand {
 
     @Override
     public String getCommandName() {
-        return "/s";
+        return COMMAND_NAME;
     }
 }

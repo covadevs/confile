@@ -12,6 +12,10 @@ public class ScreenManager implements Manager {
         System.out.println(clear);
     }
 
+    public void unknownCommand() {
+        System.out.println("Unkown command!");
+    }
+
     public void showMenu() {
         System.out.println(
                 "+---------------------------------------------------------------------------------+\n" +

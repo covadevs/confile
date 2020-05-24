@@ -4,6 +4,7 @@ import br.com.confile.manager.Manager;
 
 public class ClearScreenCommand extends BaseScreenManagerCommand {
 
+    public static final String COMMAND_NAME = "/c";
 
     public ClearScreenCommand(Manager manager) {
         super(manager);
@@ -16,6 +17,6 @@ public class ClearScreenCommand extends BaseScreenManagerCommand {
 
     @Override
     public String getCommandName() {
-        return "/c";
+        return COMMAND_NAME;
     }
 }

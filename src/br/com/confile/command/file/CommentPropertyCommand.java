@@ -1,7 +1,6 @@
 package br.com.confile.command.file;
 
 import br.com.confile.manager.Manager;
-import br.com.confile.to.CommandTO;
 
 public class CommentPropertyCommand extends BaseFileManagerCommand {
 
@@ -9,23 +8,26 @@ public class CommentPropertyCommand extends BaseFileManagerCommand {
 
     private static final int PROPERTY_INDEX = 0;
 
+    public static final String COMMAND_NAME = "/#";
+
     public CommentPropertyCommand(Manager manager) {
         super(manager);
     }
 
     @Override
     public void execute() {
+        beforeExecute();
         manager.commentProperty(this.propertyIndex);
     }
 
     @Override
     public String getCommandName() {
-        return "/#";
+        return COMMAND_NAME;
     }
 
     @Override
-    protected void beforeExecute(CommandTO commandTO) {
-        super.beforeExecute(commandTO);
+    protected void beforeExecute() {
+        super.beforeExecute();
         if(!commandTO.getCommandParams().isEmpty()) {
             this.propertyIndex = Integer.parseInt(commandTO.getCommandParams().get(PROPERTY_INDEX));
         }

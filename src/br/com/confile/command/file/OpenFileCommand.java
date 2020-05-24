@@ -2,15 +2,15 @@ package br.com.confile.command.file;
 
 import br.com.confile.command.FlushableCommand;
 import br.com.confile.manager.Manager;
-import br.com.confile.to.CommandTO;
 
 import java.io.IOException;
 
 public class OpenFileCommand extends BaseFileManagerCommand implements FlushableCommand {
 
     private String path;
-
     private static final Integer PATH = 0;
+    public static final String COMMAND_NAME = "/o";
+
 
     public OpenFileCommand(Manager manager, String path) {
         super(manager);
@@ -19,6 +19,7 @@ public class OpenFileCommand extends BaseFileManagerCommand implements Flushable
 
     @Override
     public void execute() {
+        beforeExecute();
         try {
             this.manager.openFile(this.path);
         } catch (IOException e ) {
@@ -29,12 +30,12 @@ public class OpenFileCommand extends BaseFileManagerCommand implements Flushable
 
     @Override
     public String getCommandName() {
-        return "/o";
+        return COMMAND_NAME;
     }
 
     @Override
-    protected void beforeExecute(CommandTO commandTO) {
-        super.beforeExecute(commandTO);
+    protected void beforeExecute() {
+        super.beforeExecute();
         if(!commandTO.getCommandParams().isEmpty()) {
             this.path = commandTO.getCommandParams().get(PATH);
         }

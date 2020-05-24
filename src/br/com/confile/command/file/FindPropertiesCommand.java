@@ -1,12 +1,12 @@
 package br.com.confile.command.file;
 
 import br.com.confile.manager.Manager;
-import br.com.confile.to.CommandTO;
 
 public class FindPropertiesCommand extends BaseFileManagerCommand {
 
-    public static final int SEARCH_STRING = 0;
     private String searchString;
+    private static final int SEARCH_STRING = 0;
+    public static final String COMMAND_NAME = "/f";
 
     public FindPropertiesCommand(Manager manager, String searchString) {
         super(manager);
@@ -15,17 +15,18 @@ public class FindPropertiesCommand extends BaseFileManagerCommand {
 
     @Override
     public void execute() {
+        beforeExecute();
         manager.findProperties(this.searchString);
     }
 
     @Override
     public String getCommandName() {
-        return "/f";
+        return COMMAND_NAME;
     }
 
     @Override
-    protected void beforeExecute(CommandTO commandTO) {
-        super.beforeExecute(commandTO);
+    protected void beforeExecute() {
+        super.beforeExecute();
         if(!commandTO.getCommandParams().isEmpty()) {
             this.searchString = commandTO.getCommandParams().get(SEARCH_STRING);
         }

@@ -4,6 +4,8 @@ import br.com.confile.manager.Manager;
 
 public class ShowMenuCommand extends BaseScreenManagerCommand {
 
+    public static final String COMMAND_NAME = "/m";
+
     public ShowMenuCommand(Manager manager) {
         super(manager);
     }
@@ -15,6 +17,6 @@ public class ShowMenuCommand extends BaseScreenManagerCommand {
 
     @Override
     public String getCommandName() {
-        return "/m";
+        return COMMAND_NAME;
     }
 }
