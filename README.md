@@ -35,6 +35,11 @@ varn=valuen
 * _/s_ Show properties from a file
     * You need properties previously loaded. <br/>
     You can do it by using the _/l_ command.
+    
+# Features to do
+-[ ] Add property _/a_
+-[ ] Remove property _/r_
+-[ ] Change property key or value _/z_
 
 
 ![GitHub Logo](/uml.jpeg)
