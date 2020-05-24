@@ -12,3 +12,5 @@ A properties file editor
 |    /x   | save file                                       |          -          |
 |    /c   | clear screen                                    |          -          |
 |    /q   | quit program                                    |          -          |
+
+![GitHub Logo](/uml.jpeg)
