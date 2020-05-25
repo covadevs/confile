@@ -40,6 +40,7 @@ varn=valuen
 - [ ] Add property _/a_ <br/>
 - [ ] Remove property _/r_ <br/>
 - [ ] Change property key or value _/z_ <br/>
+- [ ] Create new properties file _/n_ <br/>
 
 
 ![GitHub Logo](/uml.jpeg)
